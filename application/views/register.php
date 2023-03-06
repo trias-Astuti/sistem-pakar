@@ -17,7 +17,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="<?php echo base_url().'designadmin/css/vertical-layout-light/style.css'?>">
   <!-- endinject -->
-  <link rel="shortcut icon" href="<?php echo base_url().'designadmin/images/favicon.png"'?>/>
+  <link rel="shortcut icon" href="<?php echo base_url().'designadmin/images/favicon.png"'?>"/>
 </head>
 
 <body>
@@ -32,12 +32,15 @@
               </div>
               <h4>New here?</h4>
               <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-              <form class="pt-3">
+              <form class="pt-3" action="<?= base_url('user-register-proses') ?>" method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username">
+                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Nama Lengkap" name="nama_lengkap" >
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                  <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username" name="username" >
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
                 </div>
                 <!-- <div class="form-group">
                   <select class="form-control form-control-lg" id="exampleFormControlSelect2">
@@ -49,15 +52,15 @@
                     <option>Sistem Informasi</option>
                   </select>
                 </div> -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <select class="form-control form-control-lg" id="exampleFormControlSelect2">
                     <option>Status</option>
                     <option>Peserta</option>
                     <option>Psikologi</option>
                     </select>
-                </div>
+                </div> -->
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="mb-4">
                   <div class="form-check">
@@ -68,7 +71,7 @@
                   </div>
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN UP</a>
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN UP</button>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
                   Already have an account? <a href="login.html" class="text-primary">Login</a>

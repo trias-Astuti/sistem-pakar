@@ -6,6 +6,7 @@ class Login extends CI_Controller {
 	{
 		parent:: __construct();
 		$this->load->model('Model_Login');
+		$this->load->Model('M_auth');
 	}
 
 	function index(){
@@ -14,6 +15,8 @@ class Login extends CI_Controller {
 	function auth(){
 		$username=$this->input->post('username');
 		$password=$this->input->post('password');
+
+
 		$cadmin=$this->Model_Login->cekadmin($username,$password);
 		if($cadmin->num_rows()>0){
 			$xadmin=$cadmin->array();
@@ -43,4 +46,33 @@ class Login extends CI_Controller {
 		redirect($url);
 	}
 
+	// login
+	public function loginUser()
+	{
+		$email = $this->input->post('email', TRUE);
+		$password = $this->input->post('password', TRUE);
+
+		$userLogin = $this->M_auth->login($email);
+
+		if (!empty($userLogin['email'])) {
+			if (password_verify($password, $userLogin['password'])) {
+				$userLogin = array(
+					'id_user'   => $userLogin['id_user'],
+					'nama_lengkap'      => $userLogin['nama_lengkap'],
+					'email'     => $userLogin['email'],
+					'username'     => $userLogin['username'],
+					'is_login'  => TRUE
+				);
+				$this->session->set_userdata($userLogin);
+				$this->session->set_flashdata('success', 'Login berhasil !');
+				redirect('dashboard', 'refresh');
+			} else {
+				$this->session->set_flashdata('danger', 'Oppss... Password anda salah !');
+				redirect('user/login', 'refresh');
+			}
+		} else {
+			$this->session->set_flashdata('error', 'Oppss... Email anda tidak terdaftar atau salah !  !');
+			redirect('user/login', 'refresh');
+		}
+    }
 }
